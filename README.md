@@ -4,6 +4,8 @@ A simple, mobile-friendly to-do list web app built with HTML, CSS, and vanilla J
 
 This is a beginner frontend project created to practise JavaScript fundamentals while building a useful, interactive application.
 
+[Live Preview](https://parthbiswas9266.github.io/pocket-tasks/).
+
 ## Features
 
 - Add up to 10 tasks
@@ -53,6 +55,4 @@ This project helps me practise:
 - Continue refining the mobile experience
 
 ## License
-
-No license has been added yet.
 
