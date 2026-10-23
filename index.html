@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="A simple, mobile-friendly to-do list."
+  >
+
+  <title>PocketTasks | My To-Do List</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+
+
+<body>
+  <main class="app">
+
+    <!-- App header -->
+    <header class="app-header">
+      <div class="brand">
+        <h1>PocketTasks</h1>
+        <p>A little progress every day.</p>
+      </div>
+
+      <button
+        type="button"
+        id="theme-toggle"
+        class="theme-toggle"
+        aria-label="Switch to dark theme"
+      >
+        Dark mode
+      </button>
+    </header>
+
+    <!-- Task progress -->
+    <section class="progress-section"
+      aria-label="Task progress">
+
+      <div class="progress-heading">
+        <h2>My tasks</h2>
+        <span id="task-count">0 / 10 tasks</span>
+      </div>
+
+      <progress
+        id="task-progress"
+        value="0"
+        max="10"
+        aria-label="Number of tasks added"
+      ></progress>
+
+      <p id="completion-summary" aria-live="polite">
+        No tasks completed yet.
+      </p>
+    </section>
+
+    <!-- Add a task -->
+    <section class="add-task-section">
+      <h2>Add a task</h2>
+
+      <form id="task-form">
+        <label for="task-input">Task description</label>
+
+        <div class="task-input-group">
+          <input
+            type="text"
+            id="task-input"
+            name="task"
+            placeholder="What needs to be done?"
+            maxlength="120"
+            autocomplete="off"
+            required
+          >
+
+          <button type="submit" id="add-task-button">
+            Add task
+          </button>
+        </div>
+
+        <p id="form-message" role="status"></p>
+      </form>
+    </section>
+
+    <!-- Task list -->
+    <section class="task-list-section">
+      <h2>Your list</h2>
+
+      <p id="empty-state">
+        Your list is empty. Add your first task above!
+      </p>
+
+      <ul id="task-list" aria-label="To-do items"></ul>
+    </section>
+
+    <!-- Reset action -->
+    <footer class="app-footer">
+      <button
+        type="button"
+        id="reset-button"
+        class="reset-button"
+      >
+        Reset all tasks
+      </button>
+
+      <p>Your tasks are saved in this browser. No database used in this project.</p>
+    </footer>
+
+  </main>
+
+  <!-- Edit task dialog -->
+  <dialog id="edit-dialog">
+    <form id="edit-form">
+      <h2>Edit task</h2>
+
+      <label for="edit-input">Task description</label>
+
+      <input
+        type="text"
+        id="edit-input"
+        maxlength="120"
+        required
+      >
+
+      <div class="dialog-actions">
+        <button type="button" id="cancel-edit-button">
+          Cancel
+        </button>
+
+        <button type="submit">
+          Save changes
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Reset confirmation dialog -->
+  <dialog id="reset-dialog">
+    <h2>Reset all tasks?</h2>
+
+    <p>
+      This will permanently remove all saved tasks
+      from this browser. This action cannot be undone.
+    </p>
+
+    <div class="dialog-actions">
+      <button type="button" id="cancel-reset-button">
+        Keep my tasks
+      </button>
+
+      <button type="button" id="confirm-reset-button">
+        Yes, reset
+      </button>
+    </div>
+  </dialog>
+
+</body>
+</html>

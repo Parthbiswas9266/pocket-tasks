@@ -1,0 +1,426 @@
+
+/* ---------- 1. Theme variables ---------- */
+
+:root {
+  color-scheme: light;
+
+  --bg-color: #f4f6f8;
+  --surface-color: #ffffff;
+  --text-color: #202938;
+  --muted-color: #687386;
+  --border-color: #e0e5eb;
+  --primary-color: #287653;
+  --primary-hover: #206346;
+  --danger-color: #bd4141;
+  --completed-color: #929baa;
+
+  --radius: 14px;
+  --shadow: 0 4px 18px rgb(20 30 50 / 5%);
+}
+
+body.dark-theme {
+  color-scheme: dark;
+
+  --bg-color: #141a22;
+  --surface-color: #202834;
+  --text-color: #edf1f7;
+  --muted-color: #a2adbd;
+  --border-color: #354151;
+  --primary-color: #64c997;
+  --primary-hover: #83d9ad;
+  --danger-color: #ff8585;
+  --completed-color: #8793a3;
+
+  --shadow: 0 4px 18px rgb(0 0 0 / 15%);
+}
+
+
+/* ---------- 2. Reset and base styles ---------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  line-height: 1.5;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 4px;
+  font-size: 1.75rem;
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+
+p {
+  color: var(--muted-color);
+}
+
+
+/* ---------- 3. Main application layout ---------- */
+
+.app {
+  width: 100%;
+  max-width: 1000px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 24px 18px 32px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.brand p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.theme-toggle {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 9px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--surface-color);
+  color: var(--text-color);
+}
+
+
+/* ---------- 4. Shared section styling ---------- */
+
+.progress-section,
+.add-task-section,
+.task-list-section {
+  margin-bottom: 24px;
+}
+
+.progress-section,
+.add-task-section {
+  padding: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background: var(--surface-color);
+  box-shadow: var(--shadow);
+}
+
+.progress-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;                     
+}
+
+.progress-heading h2 {
+  margin-bottom: 8px;
+}
+
+#task-count {
+  color: var(--muted-color);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+#task-progress {
+  display: block;
+  width: 100%;
+  height: 8px;
+  margin: 8px 0 12px;
+  overflow: hidden;
+  border: none;
+  border-radius: 999px;
+  accent-color: var(--primary-color);
+}
+
+#completion-summary {
+  margin-bottom: 0;
+  font-size: 0.85rem;
+}
+
+
+/* ---------- 5. Task input ---------- */
+
+#task-form label,
+#edit-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.task-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#task-input,
+#edit-input {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+#task-input::placeholder,
+#edit-input::placeholder {
+  color: var(--muted-color);
+}
+
+#add-task-button,
+.dialog-actions button {
+  min-height: 48px;
+  padding: 11px 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary-color);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+#add-task-button:hover,
+.dialog-actions button:hover {
+  filter: brightness(0.75);
+}
+
+#form-message {
+  min-height: 0;
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+}
+
+#form-message:empty {
+  display: none;
+}
+
+
+/* ---------- 6. Task list ---------- */
+
+.task-list-section > h2 {
+  margin-bottom: 14px;
+}
+
+#empty-state {
+  padding: 28px 16px;
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius);
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+#task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--surface-color);
+  box-shadow: var(--shadow);
+}
+
+.task-checkbox {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.task-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.task-item.completed .task-text {
+  color: var(--completed-color);
+  text-decoration: line-through;
+}
+
+.task-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 4px;
+}
+
+.task-actions button {
+  min-width: 40px;
+  min-height: 40px;
+  padding: 6px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted-color);
+}
+
+.task-actions button:hover {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.task-actions .delete-button:hover {
+  color: var(--danger-color);
+}
+
+
+/* ---------- 7. Footer and reset ---------- */
+
+.app-footer {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.reset-button {
+  width: 90%;
+  min-height: 48px;
+  padding: 12px;
+  border: 1px solid var(--danger-color);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+.reset-button:hover {
+  background: var(--surface-color);
+}
+
+.app-footer p {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+}
+
+
+/* ---------- 8. Dialogs ---------- */
+
+dialog {
+  width: calc(100% - 32px);
+  max-width: 800px;
+  padding: 24px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: var(--surface-color);
+  color: var(--text-color);
+  box-shadow: 0 16px 50px rgb(0 0 0 / 20%);
+}
+
+dialog::backdrop {
+  background: rgb(0 0 0 / 60%);
+}
+
+dialog p {
+  line-height: 1.6;
+}
+
+#edit-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-actions {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dialog-actions button[type="button"] {
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-color);
+}
+
+
+/* ---------- 9. Wider screens ---------- */
+
+@media (min-width: 520px) {
+  .app {
+    padding: 40px 24px;
+  }
+
+  .task-input-group {
+    flex-direction: row;
+  }
+
+  #add-task-button {
+    flex-shrink: 0;
+  }
+
+  .dialog-actions {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
