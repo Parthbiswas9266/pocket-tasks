@@ -56,3 +56,6 @@ This project helps me practise:
 
 ## License
 
+MIT License
+Copyright (c) 2026 Parth Biswas
+
