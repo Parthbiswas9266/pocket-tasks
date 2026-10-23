@@ -56,6 +56,6 @@ This project helps me practise:
 
 ## License
 
-MIT License
+MIT License /n
 Copyright (c) 2026 Parth Biswas
 
